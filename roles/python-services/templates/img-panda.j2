@@ -1,0 +1,8 @@
+class endpoint:
+    def __init__(self, imgs_path='{{ item.resource_dir }}'):
+        self.imgs_path = imgs_path
+        self.imgs = listdir(self.imgs_path)
+
+    def run(self):
+        img = choice(self.imgs)
+        return send_from_directory(self.imgs_path, img, mimetype=guess_type(img)[0])

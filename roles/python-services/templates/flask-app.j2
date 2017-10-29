@@ -1,0 +1,11 @@
+from flask import Flask
+{% for import in item.imports %}
+{{ import }}
+{% endfor %}
+
+{% include item.name + ".j2" %}
+
+app = Flask(__name__)
+app.add_url_rule('{{ item.flask.route_app }}', view_func=endpoint().run, methods={{ item.flask.methods }})
+if __name__ == '__main__':
+    app.run(port='{{ item.flask.port }}')
