@@ -2,8 +2,8 @@
 # defaults file for python-services
 services:
   - name: "img-panda"
-    install_path: "/img-app"
-    resource_dir: "/img-app/resources"
+    install_path: "/img-panda"
+    resource_dir: "/img-panda/resources"
     imports:
     - "from random import choice"
     - "from mimetypes import guess_type"
@@ -18,7 +18,7 @@ services:
       - "GET"
 
   - name: "smart-panda"
-    install_path: "/smart-app"
+    install_path: "/smart-panda"
     imports:
       - "from multiprocessing import Value"
       - "from flask import request"

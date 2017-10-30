@@ -1,16 +1,22 @@
 
 - name: "Create the necessary directory for {{ service.name }}"
   file: path="{{ service.install_path }}" state=directory mode=0755
+  when: service.name in required_services
+  ignore_errors: yes
 
-- name: "Copy the resources dir for img-service"
+- name: "Copy the required content for {{ service.name }}"
+  copy: src="{{ service.name }}/" dest="{{ service.install_path }}" mode=0644
+  when: service.resource_dir is defined and service.name in required_services
 
 - name: "Rendering template for {{ service.name }}"
-  template: src=flask-app.j2 dest="{{ service.install_path }}/app.py" mode=0755
+  template: src=flask-app.py.j2 dest="{{ service.install_path }}/app.py" mode=0755
   register: service_file
+  when: service.name in required_services
 
 - name: "Render the {{ service.name }} upstart service"
-  template: src=upstart.j2.conf dest=/etc/init/"{{ service.name }}".conf mode=0644
+  template: src=upstart.conf.j2 dest="/etc/init/{{ service.name }}.conf" mode=0644
+  when: service.name in required_services
 
 - name: "Restart {{ service.name }} service"
   service: name="{{ service.name }}" state=restarted
-  when: service_file.changed
+  when: service_file.changed and service.name in required_services

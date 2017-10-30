@@ -1,5 +1,8 @@
 ---
 # tasks file for python-services
+- include: common.yml
+
+# Runs the service task book on each of the python services
 - include: services.yml
   with_items: "{{ services }}"
   loop_control:

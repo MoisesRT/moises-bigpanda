@@ -3,4 +3,4 @@ description "{{ service.name }} Service"
 start on runlevel [2345]
 stop on runlevel [!2345]
 
-exec {{ service.install_path }}/app.py >> {{ service.install_path/log_file }} 2>&1
+exec {{ service.install_path }}/app.py >> {{ service.install_path }}/log_file 2>&1
