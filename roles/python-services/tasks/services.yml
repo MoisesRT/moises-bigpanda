@@ -2,7 +2,6 @@
 - name: "Create the necessary directory for {{ service.name }}"
   file: path="{{ service.install_path }}" state=directory mode=0755
   when: service.name in required_services
-  ignore_errors: yes
 
 - name: "Copy the required content for {{ service.name }}"
   copy: src="{{ service.name }}/" dest="{{ service.install_path }}" mode=0644
