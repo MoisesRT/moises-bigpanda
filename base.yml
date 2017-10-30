@@ -12,3 +12,13 @@
   roles:
     - { role: nodejs, tags: nodejs }
     - { role: bamboo, tags: bamboo }
+
+- name: Python services
+  hosts: base
+  become: yes
+  vars:
+    - required_services:
+      - "img-panda"
+      - "smart-panda"
+  roles:
+    - python-services
