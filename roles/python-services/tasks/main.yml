@@ -1,7 +1,6 @@
 ---
 # tasks file for python-services
-
-- template:
-    src: flask-app.j2
-    dest: "/home/osboxes/projects/moises-bigpanda/roles/python-services/files/{{ item.name }}.py"
+- include: services.yml
   with_items: "{{ services }}"
+  loop_control:
+    loop_var: service

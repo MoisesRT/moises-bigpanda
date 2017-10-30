@@ -1,0 +1,11 @@
+from flask import Flask
+{% for import in service.imports %}
+{{ import }}
+{% endfor %}
+
+{% include service.name + ".j2" %}
+
+app = Flask(__name__)
+app.add_url_rule('{{ service.flask.route_app }}', view_func=endpoint().run, methods={{ service.flask.methods }})
+if __name__ == '__main__':
+    app.run(port='{{ service.flask.port }}')

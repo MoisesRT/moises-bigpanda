@@ -1,5 +1,5 @@
 class endpoint:
-    def __init__(self, imgs_path='{{ item.resource_dir }}'):
+    def __init__(self, imgs_path='{{ service.resource_dir }}'):
         self.imgs_path = imgs_path
         self.imgs = listdir(self.imgs_path)
 
